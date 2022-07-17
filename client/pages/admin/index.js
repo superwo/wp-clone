@@ -1,8 +1,11 @@
+import AdminLayout from "../../components/layout/AdminLayout";
+
 function Admin() {
   return (
-    <div>
-      <h1>Admin</h1>
-    </div>
+    <AdminLayout>
+      <h1>This is admin page props...</h1>
+      <p>More content...</p>
+    </AdminLayout>
   );
 }
 
