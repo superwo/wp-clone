@@ -4,6 +4,8 @@ import {
   MailOutlined,
   AppstoreOutlined,
   SettingOutlined,
+  UserAddOutlined,
+  UserOutlined,
 } from "@ant-design/icons";
 import ToggleTheme from "./ToggleTheme";
 import Link from "next/link";
@@ -15,18 +17,23 @@ const TopNav = () => {
     setCurrent(e.key);
   };
   return (
-    <Menu onClick={handleClick} mode="horizontal" selectedKeys={[current]}>
+    <Menu
+      onClick={handleClick}
+      mode="horizontal"
+      selectedKeys={[current]}
+      theme="dark"
+    >
       <Menu.Item key="mail" icon={<MailOutlined />}>
         <Link href="/">
           <a>CMS</a>
         </Link>
       </Menu.Item>
-      <Menu.Item key="signup" icon={<MailOutlined />}>
+      <Menu.Item key="signup" icon={<UserAddOutlined />}>
         <Link href="/signup">
           <a>Signup</a>
         </Link>
       </Menu.Item>
-      <Menu.Item key="signin" icon={<MailOutlined />}>
+      <Menu.Item key="signin" icon={<UserOutlined />}>
         <Link href="/signin">
           <a>Signin</a>
         </Link>
