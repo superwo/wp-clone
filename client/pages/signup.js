@@ -1,10 +1,19 @@
 import { Form, Input, Button, Col, Row } from "antd";
 import { UserOutlined, LockOutlined, MailOutlined } from "@ant-design/icons";
 import Link from "next/link";
+import axios from "axios";
+import toast, { Toaster } from "react-hot-toast";
 
 function Signup() {
-  const onFinish = (values) => {
+  const onFinish = async (values) => {
     console.log("values => ", values);
+    try {
+      const res = await axios.post("http://localhost:8000/api/signup", values);
+      console.log(res);
+    } catch (error) {
+      toast.error("Signup failed. Try again later.");
+      console.log(error);
+    }
   };
 
   return (
