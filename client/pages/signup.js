@@ -1,18 +1,32 @@
+import { useState } from "react";
 import { Form, Input, Button, Col, Row } from "antd";
 import { UserOutlined, LockOutlined, MailOutlined } from "@ant-design/icons";
 import Link from "next/link";
 import axios from "axios";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 
 function Signup() {
+  const [loading, setLoading] = useState(false);
+
   const onFinish = async (values) => {
-    console.log("values => ", values);
+    setLoading(true);
     try {
-      const res = await axios.post("http://localhost:8000/api/signup", values);
-      console.log(res);
+      const { data } = await axios.post(
+        "http://localhost:8000/api/signup",
+        values
+      );
+
+      if (data?.error) {
+        toast.error(data.error);
+        setLoading(false);
+      } else {
+        toast.success("Successfully signed up");
+        setLoading(false);
+      }
     } catch (error) {
       toast.error("Signup failed. Try again later.");
       console.log(error);
+      setLoading(false);
     }
   };
 
@@ -61,6 +75,7 @@ function Signup() {
               type="primary"
               htmlType="submit"
               className="login-form-button"
+              loading={loading}
             >
               Register
             </Button>

@@ -1,4 +1,3 @@
-
 import User from "../models/user";
 import { hashPassword, comparePassword } from "../helpers/auth";
 import jwt from "jsonwebtoken";
@@ -44,6 +43,8 @@ export const signup = async (req, res) => {
         email,
         password: hashedPassword,
       }).save();
+
+      // console.log("user saved in signup", user);
 
       // create signed token
       const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, {
@@ -117,7 +118,7 @@ export const forgotPassword = async (req, res) => {
     from: process.env.EMAIL_FROM,
     to: user.email,
     subject: "Password reset code",
-    html: "<h1>Your password  reset code is: {resetCode}</h1>"
+    html: "<h1>Your password  reset code is: {resetCode}</h1>",
   };
   // send email
   try {
